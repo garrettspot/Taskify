@@ -41,11 +41,17 @@ const corsOptions = {
   exposedHeaders: ['Access-Control-Allow-Origin']
 };
 
-// Apply CORS before other middleware
+// Apply CORS middleware
 app.use(cors(corsOptions));
 
-// Enable pre-flight requests for all routes
-app.options('*', cors(corsOptions));
+// Instead of app.options('*', cors())
+app.use((req, res, next) => {
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+    return res.status(200).json({});
+  }
+  next();
+});
 
 // Middleware
 app.use(express.json());
