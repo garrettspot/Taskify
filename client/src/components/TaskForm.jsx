@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
+const defaultDate = () => {
+  const today = new Date();
+  return today.toISOString().split('T')[0];
+};
+
 const TaskForm = ({ task, onSubmit, onClose }) => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     priority: 'medium',
-    dueDate: ''
+    dueDate: defaultDate()
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -16,7 +21,7 @@ const TaskForm = ({ task, onSubmit, onClose }) => {
         title: task.title || '',
         description: task.description || '',
         priority: task.priority || 'medium',
-        dueDate: task.dueDate ? new Date(task.dueDate).toISOString().split('T')[0] : ''
+        dueDate: task.dueDate ? new Date(task.dueDate).toISOString().split('T')[0] : defaultDate()
       });
     }
   }, [task]);
@@ -40,13 +45,20 @@ const TaskForm = ({ task, onSubmit, onClose }) => {
       return;
     }
 
+    // Ensure dueDate is set to today if missing
+    const taskData = {
+      title: formData.title.trim(),
+      description: formData.description.trim(),
+      dueDate: formData.dueDate || defaultDate()
+    };
+
     try {
       if (task) {
         // Update existing task
-        await onSubmit(task._id, formData);
+        await onSubmit(task._id, taskData);
       } else {
         // Create new task
-        await onSubmit(formData);
+        await onSubmit(taskData);
       }
     } catch (error) {
       setError('Error saving task');
@@ -147,7 +159,7 @@ const TaskForm = ({ task, onSubmit, onClose }) => {
               className="form-input"
               value={formData.dueDate}
               onChange={handleChange}
-              min={new Date().toISOString().split('T')[0]}
+              min={defaultDate()}
             />
           </div>
 

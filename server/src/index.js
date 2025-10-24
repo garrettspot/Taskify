@@ -31,15 +31,21 @@ const corsOptions = {
     if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
+      console.log('Blocked by CORS:', origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['Access-Control-Allow-Origin']
 };
 
+// Apply CORS before other middleware
 app.use(cors(corsOptions));
+
+// Enable pre-flight requests for all routes
+app.options('*', cors(corsOptions));
 
 // Middleware
 app.use(express.json());
