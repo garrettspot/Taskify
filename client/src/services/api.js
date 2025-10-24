@@ -2,13 +2,16 @@ import axios from 'axios';
 
 // Create axios instance with base configuration
 const api = axios.create({
-  // Use environment variables injected by Vite, fallback for development
-  baseURL: import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000',
+  // Use environment variables injected by Vite
+  baseURL: import.meta.env.VITE_API_URL,
   timeout: Number(import.meta.env.VITE_API_TIMEOUT) || 10000,
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+// Log the API URL being used (remove in production)
+console.log('API URL:', import.meta.env.VITE_API_URL);
 
 // Request interceptor to add auth token
 api.interceptors.request.use(
