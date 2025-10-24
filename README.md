@@ -60,7 +60,7 @@ Create a `.env` file in the server directory:
 ```bash
 # server/.env
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/taskify
+MONGODB_URI=
 JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
 NODE_ENV=development
 ```
@@ -234,3 +234,16 @@ This project is open source and available under the [MIT License](LICENSE).
 ## Support
 
 If you encounter any issues or have questions, please open an issue on the repository or contact the development team.
+
+## Important Note About Server
+
+The backend is hosted on Render.com using their free tier service. Please note:
+
+- The server is located at: https://taskify-51gq.onrender.com/
+- The server spins down after 15 minutes of inactivity
+- Initial startup can take up to 5 minutes when the server is cold
+- To wake up the server, you can:
+  - Visit https://taskify-51gq.onrender.com/api/health
+  - Or make any API call to the server
+
+If you experience delays in API responses, this is likely due to the cold start. Please wait a few minutes for the server to initialize.
