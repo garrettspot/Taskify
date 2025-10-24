@@ -141,6 +141,11 @@ npm start
 4. **Manage Tasks**: Edit, delete, or mark tasks as complete
 5. **Track Progress**: View your completion statistics on the dashboard
 
+## Example User
+
+**Email:** josh@gmail.com
+**Password:** 123456
+
 ## Project Structure
 
 ```
