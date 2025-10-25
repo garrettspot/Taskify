@@ -55,6 +55,18 @@ export const AuthProvider = ({ children }) => {
       
       return { success: true };
     } catch (error) {
+      console.error('Login error:', error);
+      let errorMessage = 'Login failed. Please try again.';
+      
+      if (error.response) {
+        // Server responded with error
+        errorMessage = error.response.data?.message || 
+                      (error.response.status === 404 ? 'Service unavailable' : 'Invalid credentials');
+      } else if (error.request) {
+        // Request made but no response
+        errorMessage = 'Cannot connect to server. Please check your internet connection.';
+      }
+      
       return { 
         success: false, 
         message: error.response?.data?.message || 'Login failed' 
