@@ -19,8 +19,8 @@ connectDB();
 
 // CORS configuration
 const allowedOrigins = [
-  'http://localhost:3000',
-  'https://taskify-red-two.vercel.app'  // Add your Vercel domain
+  'http://127.0.0.1:3000',
+  'https://taskify-red-two.vercel.app',
 ];
 
 const corsOptions = {
