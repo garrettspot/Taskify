@@ -203,27 +203,6 @@ JWT_SECRET=your-secret-key                   # JWT signing secret
 NODE_ENV=development                         # Environment mode
 ```
 
-## Troubleshooting
-
-### Common Issues
-
-1. **MongoDB Connection Error**
-   - Ensure MongoDB is running
-   - Check the connection string in `.env`
-   - Verify MongoDB service is accessible
-
-2. **Port Already in Use**
-   - Change the PORT in `.env` file
-   - Kill existing processes using the port
-
-3. **CORS Issues**
-   - The backend is configured to allow CORS from the React app
-   - Ensure the proxy setting in client/package.json is correct
-
-4. **Authentication Issues**
-   - Check JWT_SECRET is set in `.env`
-   - Verify token is being sent in Authorization header
-
 ## Contributing
 
 1. Fork the repository
@@ -235,10 +214,6 @@ NODE_ENV=development                         # Environment mode
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).
-
-## Support
-
-If you encounter any issues or have questions, please open an issue on the repository or contact the development team.
 
 ## Important Note About Server
 

@@ -47,6 +47,7 @@ const Dashboard = () => {
       const response = await api.put(`/api/tasks/${taskId}`, taskData);
       setTasks(tasks.map(task => task._id === taskId ? response.data : task));
       setMessage('Task updated successfully!');
+      setShowForm(false);
       setEditingTask(null);
       setTimeout(() => setMessage(''), 3000);
     } catch (error) {
